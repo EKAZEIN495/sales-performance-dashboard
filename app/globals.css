@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --background: #f7f5f3;
+  --foreground: #261e1a;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+button, input, select { font: inherit; }
+
+@layer components {
+  .card { @apply rounded-2xl border border-stone-200 bg-white shadow-card; }
+  .field { @apply h-11 w-full rounded-xl border border-stone-300 bg-white px-3 text-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100; }
+  .btn-primary { @apply inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-brand-600 px-4 text-sm font-semibold text-white transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-secondary { @apply inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-stone-300 bg-white px-3 text-sm font-medium text-stone-700 transition hover:bg-stone-50; }
+  .label { @apply mb-1.5 block text-xs font-semibold uppercase tracking-wide text-stone-500; }
+}

@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Store {
+  id    Int     @id @default(autoincrement())
+  nama  String
+  kode  String  @unique
+  sales Sales[]
+}
+
+model Sales {
+  id      Int          @id @default(autoincrement())
+  nama    String
+  storeId Int
+  store   Store        @relation(fields: [storeId], references: [id])
+  aktif   Boolean      @default(true)
+  targets Target[]
+  entries DailyEntry[]
+
+  @@index([storeId, aktif])
+}
+
+enum Kategori {
+  DEVICE
+  ACC_IOT
+  REPAIR_CONTRACT
+  CARRIER
+  CE
+}
+
+model Target {
+  id       Int       @id @default(autoincrement())
+  salesId  Int
+  sales    Sales     @relation(fields: [salesId], references: [id])
+  kategori Kategori
+  bulan    Int
+  tahun    Int
+  nilai    Decimal   @db.Decimal(15, 2)
+
+  @@unique([salesId, kategori, bulan, tahun])
+  @@index([bulan, tahun])
+}
+
+model DailyEntry {
+  id        Int       @id @default(autoincrement())
+  salesId   Int
+  sales     Sales     @relation(fields: [salesId], references: [id])
+  kategori  Kategori
+  tanggal   DateTime
+  nilaiMtd  Decimal   @db.Decimal(15, 2)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([salesId, kategori, tanggal])
+  @@unique([salesId, kategori, tanggal])
+}
