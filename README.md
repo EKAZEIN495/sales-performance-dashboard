@@ -1,4 +1,5 @@
 # Erafone & More Sales Performance Dashboard
+![Uploading image.png…]()
 
 Dashboard untuk melihat target, MTD, proyeksi akhir bulan, achievement, gap, kontribusi kategori, dan growth sales. Dashboard berada di `/dashboard`, sedangkan input dan edit data berada di `/admin`.
 
