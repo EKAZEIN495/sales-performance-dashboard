@@ -93,7 +93,7 @@ Simpan backup di tempat aman dan jangan commit file SQL yang berisi data toko ke
 5. Sebelum deploy, buka **Site configuration → Environment variables** dan tambahkan:
 
    ```env
-   DATABASE_URL=mysql://avnadmin:PASSWORD@HOST:PORT/defaultdb?sslaccept=strict&connection_limit=3
+   DATABASE_URL=mysql://avnadmin:PASSWORD_BARU@HOST_AIVEN:PORT/defaultdb?ssl-mode=REQUIRED&connection_limit=3
    ADMIN_USERNAME=admin
    ADMIN_PASSWORD=GANTI_DENGAN_PASSWORD_KUAT
    AUTH_SECRET=GANTI_DENGAN_SECRET_ACAK
@@ -109,6 +109,27 @@ Simpan backup di tempat aman dan jangan commit file SQL yang berisi data toko ke
 8. Setelah selesai, Netlify memberikan domain gratis seperti `nama-dashboard.netlify.app`.
 
 Perubahan environment variable hanya berlaku pada deployment baru. Setelah mengubah variable, lakukan **Deploys → Trigger deploy**.
+
+### Jika halaman Netlify menampilkan 404
+
+Repository sudah menyediakan `netlify.toml`, sehingga pengaturan yang benar akan terbaca otomatis:
+
+```text
+Build command: npm run build
+Publish directory: .next
+Node.js: 20
+```
+
+Setelah versi terbaru masuk ke GitHub:
+
+1. Buka project di Netlify.
+2. Pastikan **Project configuration → Build & deploy → Continuous deployment → Repository** menunjuk ke `EKAZEIN495/sales-performance-dashboard` dan branch `main`.
+3. Buka **Deploys**.
+4. Pilih **Trigger deploy → Clear cache and deploy site**.
+5. Tunggu sampai status deploy menjadi **Published**.
+6. Buka domain utama atau tambahkan `/dashboard` di belakang domain.
+
+Jangan membuat redirect `/* /index.html 200`; aplikasi ini memakai Next.js server routes, bukan static SPA biasa. Jika masih 404, buka deploy terbaru dan periksa bagian **Deploy log**. Pastikan log berisi proses `next build` dan deteksi Next.js oleh Netlify.
 
 ## E. Pemeriksaan setelah online
 
