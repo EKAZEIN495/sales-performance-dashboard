@@ -51,7 +51,7 @@ DATABASE_URL="mysql://avnadmin:PASSWORD@HOST:PORT/defaultdb?sslcert=ca.pem&sslac
 Jalankan ini dari PowerShell di komputer lokal. Nilai environment hanya berlaku pada jendela terminal tersebut:
 
 ```powershell
-$env:DATABASE_URL="mysql://avnadmin:PASSWORD@HOST:PORT/defaultdb?sslaccept=strict&connection_limit=3"
+$env:DATABASE_URL="mysql://avnadmin:PASSWORD_BARU@HOST_AIVEN:PORT/defaultdb?ssl-mode=REQUIRED"
 npx prisma generate
 npx prisma migrate deploy
 npm run prisma:seed
